@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>창균과 소현의 결혼식을 도와주세요!</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app-frame">
+    <img src="assets/header.gif" alt="" class="app-bg">
+
+    <!-- ========== MAIN PAGE ========== -->
+    <div id="page-main" class="page active">
+      <div class="page-body main-body">
+        <div class="back-btn-area">
+          <a href="#" class="back-img-link" id="back-main">
+            <img src="assets/back-btn.png" alt="돌아가기" class="back-btn-img">
+          </a>
+        </div>
+        <div class="main-center">
+          <img src="assets/speech-bubble.png" alt="창균과 소현의 결혼식을 도와주세요!" class="speech-bubble-img">
+          <div class="couple-img-wrap">
+            <img src="assets/character-main.gif" alt="couple" class="couple-img">
+          </div>
+        </div>
+        <div class="main-buttons">
+          <button class="btn-main btn-start" id="btn-start">START</button>
+          <button class="btn-main btn-rank" id="btn-leaderboard">RANK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== GAME PAGE ========== -->
+    <div id="page-game" class="page">
+      <div class="game-top-bar">
+        <a href="#" class="back-img-link" id="back-game">
+          <img src="assets/back-btn.png" alt="돌아가기" class="back-btn-img">
+        </a>
+        <span class="score-text">SCORE : <span id="hud-score">0</span></span>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="game-canvas"></canvas>
+        <img id="game-char-img" src="assets/character.gif" alt="" class="char-overlay">
+      </div>
+      <div class="game-controls">
+        <button class="ctrl-circle" id="ctrl-up">↑</button>
+        <button class="ctrl-circle" id="ctrl-down">↓</button>
+      </div>
+    </div>
+
+    <!-- ========== GAME OVER OVERLAY ========== -->
+    <div id="overlay-gameover" class="overlay hidden">
+      <div class="gameover-card">
+        <div class="gameover-top">
+          <h2>GAME OVER <span class="star-deco">✦</span></h2>
+          <div class="gameover-score">
+            YOUR SCORE : <span id="final-score-value" class="score-num">0</span>
+          </div>
+        </div>
+        <div class="gameover-form-card">
+          <form id="score-form" autocomplete="off">
+            <div class="field">
+              <label>이름 / 닉네임</label>
+              <input type="text" id="input-nickname" placeholder="(5글자 이내)" maxlength="5" required>
+            </div>
+            <div class="field">
+              <label>신랑측 or 신부측</label>
+              <div class="select-wrapper">
+                <select id="input-team" required>
+                  <option value="" disabled selected>선택</option>
+                  <option value="groom">신랑측</option>
+                  <option value="bride">신부측</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>짧은 메시지</label>
+              <input type="text" id="input-message" placeholder="(30자 이내)" maxlength="30">
+            </div>
+            <button type="submit" class="btn-game btn-submit">SUBMIT</button>
+          </form>
+        </div>
+        <button class="btn-down-arrow" id="btn-skip-submit" title="Skip">↓</button>
+      </div>
+    </div>
+
+    <!-- ========== LEADERBOARD PAGE ========== -->
+    <div id="page-leader" class="page">
+      <div class="page-body leader-body">
+        <div class="back-btn-area">
+          <a href="#" class="back-img-link" id="back-leader">
+            <img src="assets/back-btn.png" alt="돌아가기" class="back-btn-img">
+          </a>
+        </div>
+        <div class="rank-spacer"></div>
+        <div class="rank-header-row">
+          <img src="assets/rank-title.png" alt="RANK" class="rank-title-img">
+          <div class="rank-couple-wrap">
+            <img src="assets/couple-rank.gif" alt="couple" class="couple-rank-img">
+          </div>
+        </div>
+        <div class="rank-col-header">
+          <span class="col-name">NAME</span>
+          <span class="col-msg">MESSAGE</span>
+          <span class="col-score">SCORE</span>
+        </div>
+        <div class="leader-list" id="leader-list"></div>
+        <div class="leader-bottom">
+          <button class="btn-game" id="btn-play-again">START</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
