@@ -11,8 +11,15 @@ const App = (() => {
   };
 
   const overlay = document.getElementById('overlay-gameover');
+  const modalLeave = document.getElementById('modal-leave-confirm');
+
+  function gameRootUrl() {
+    return new URL('./', window.location.href).href;
+  }
 
   function init() {
+    const backLeader = document.getElementById('back-leader');
+    if (backLeader) backLeader.href = gameRootUrl();
     bindEvents();
     navigateTo('main');
   }
@@ -34,9 +41,35 @@ const App = (() => {
     document.getElementById('btn-start').addEventListener('click', () => navigateTo('game'));
     document.getElementById('btn-leaderboard').addEventListener('click', () => navigateTo('leader'));
     document.getElementById('btn-play-again').addEventListener('click', () => navigateTo('game'));
-    document.getElementById('btn-skip-submit').addEventListener('click', () => navigateTo('leader'));
+    document.getElementById('btn-skip-submit').addEventListener('click', () => {
+      modalLeave.classList.remove('hidden');
+    });
+    document.getElementById('modal-btn-save').addEventListener('click', () => {
+      modalLeave.classList.add('hidden');
+      const form = document.getElementById('score-form');
+      const nick = document.getElementById('input-nickname');
+      const team = document.getElementById('input-team');
+      if (nick.value.trim() && team.value) {
+        form.requestSubmit();
+      } else if (!nick.value.trim()) {
+        nick.focus();
+      } else {
+        team.focus();
+      }
+    });
+    document.getElementById('modal-btn-leave').addEventListener('click', () => {
+      modalLeave.classList.add('hidden');
+      overlay.classList.add('hidden');
+      navigateTo('main');
+    });
+    modalLeave.addEventListener('click', e => {
+      if (e.target === modalLeave) modalLeave.classList.add('hidden');
+    });
     document.getElementById('back-game').addEventListener('click', e => { e.preventDefault(); navigateTo('main'); });
-    document.getElementById('back-leader').addEventListener('click', e => { e.preventDefault(); navigateTo('main'); });
+    document.getElementById('back-leader').addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = gameRootUrl();
+    });
     document.getElementById('score-form').addEventListener('submit', handleSubmit);
   }
 

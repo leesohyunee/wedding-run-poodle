@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5, user-scalable=yes">
   <title>창균과 소현의 결혼식을 도와주세요!</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -43,9 +43,9 @@
         <canvas id="game-canvas"></canvas>
         <img id="game-char-img" src="assets/character.gif" alt="" class="char-overlay">
       </div>
-      <div class="game-controls">
-        <button class="ctrl-circle" id="ctrl-up">↑</button>
-        <button class="ctrl-circle" id="ctrl-down">↓</button>
+      <div class="game-controls" aria-label="이동">
+        <button type="button" class="ctrl-square ctrl-square-up" id="ctrl-up" aria-label="위 레인">↑</button>
+        <button type="button" class="ctrl-square ctrl-square-down" id="ctrl-down" aria-label="아래 레인">↓</button>
       </div>
     </div>
 
@@ -81,7 +81,17 @@
             <button type="submit" class="btn-game btn-submit">SUBMIT</button>
           </form>
         </div>
-        <button class="btn-down-arrow" id="btn-skip-submit" title="Skip">↓</button>
+        <button type="button" class="btn-go-back" id="btn-skip-submit">GO BACK</button>
+      </div>
+    </div>
+
+    <div id="modal-leave-confirm" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-leave-title">
+      <div class="modal-card">
+        <p id="modal-leave-title" class="modal-leave-msg">저장하지 않고 나가겠습니까?</p>
+        <div class="modal-leave-actions">
+          <button type="button" class="btn-modal btn-modal-save" id="modal-btn-save">SAVE</button>
+          <button type="button" class="btn-modal btn-modal-leave" id="modal-btn-leave">LEAVE</button>
+        </div>
       </div>
     </div>
 
@@ -89,7 +99,7 @@
     <div id="page-leader" class="page">
       <div class="page-body leader-body">
         <div class="back-btn-area">
-          <a href="#" class="back-img-link" id="back-leader">
+          <a href="./" class="back-img-link" id="back-leader">
             <img src="assets/back-btn.png" alt="돌아가기" class="back-btn-img">
           </a>
         </div>

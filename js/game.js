@@ -10,6 +10,8 @@ const Game = (() => {
   const CHAR_DRAW_H = 80;
 
   let W, H, LANE_H, LANE_Y, CHAR_X;
+  let laneBandTop = 0;
+  let laneBandH = 0;
   let charDrawW = CHAR_DRAW_H;
 
   const assets = {};
@@ -51,7 +53,8 @@ const Game = (() => {
 
   function resize() {
     const wrap = canvas.parentElement;
-    W = FRAME_W;
+    const maxW = 375;
+    W = Math.min(maxW, Math.max(280, wrap.clientWidth || maxW));
     H = wrap.clientHeight || 480;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -63,7 +66,9 @@ const Game = (() => {
 
     const laneZoneHeight = H * 0.35;
     const laneZoneTop = H * 0.42;
-    LANE_H = laneZoneHeight / LANE_COUNT;
+    laneBandTop = laneZoneTop;
+    laneBandH = laneZoneHeight / LANE_COUNT;
+    LANE_H = laneBandH;
     LANE_Y = [
       laneZoneTop + LANE_H * 0.5,
       laneZoneTop + LANE_H * 1.5,
@@ -235,6 +240,15 @@ const Game = (() => {
     if (state.shake > 0) ctx.translate((Math.random() - .5) * state.shake, (Math.random() - .5) * state.shake);
 
     ctx.clearRect(0, 0, W, H);
+
+    /* 3 horizontal lane bands (white 30% opacity) with gaps between */
+    const LANE_GAP = 10;
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    for (let i = 0; i < LANE_COUNT; i++) {
+      const bandY = laneBandTop + i * laneBandH + LANE_GAP * 0.5;
+      const bandHeight = laneBandH - LANE_GAP;
+      ctx.fillRect(0, bandY, W, bandHeight);
+    }
 
     for (const o of state.objects) drawObj(o);
     positionChar();
