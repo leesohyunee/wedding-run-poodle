@@ -44,20 +44,21 @@ html, body {
   user-select: none;
 }
 
-/* ===== FRAME: fills narrow viewports (accessibility zoom / large text) ===== */
+/* ===== FRAME: 메인과 동일한 기본 높이 (큰 글씨 모드에서도 버튼 위치 유지) ===== */
 #app-frame {
   position: relative;
   width: 100%;
   max-width: 375px;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: min(812px, 100dvh);
+  min-height: min(812px, 100dvh);
+  max-height: 100dvh;
   margin: 0 auto;
   overflow: hidden;
   background: var(--sage);
 }
 
 @media (max-height: 812px) {
-  #app-frame { min-height: 100vh; min-height: 100dvh; height: auto; max-height: none; }
+  #app-frame { height: 100dvh; min-height: 100dvh; }
 }
 
 @media (min-height: 813px) {
@@ -248,8 +249,10 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 12px 0 100px;
+  gap: 10px;
+  padding: 12px 0 8px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  margin-top: -48px;
   z-index: 5;
 }
 .ctrl-square {
@@ -412,7 +415,7 @@ html, body {
   min-height: 48px;
   padding: 14px;
   border: none;
-  border-radius: 14px;
+  border-radius: 9999px;
   font-family: var(--font-ui);
   font-size: 17px;
   font-weight: 700;
@@ -424,8 +427,8 @@ html, body {
 }
 .btn-modal-leave {
   background: var(--gold-btn);
-  color: var(--dark);
-  border: 2px solid var(--dark);
+  color: var(--white);
+  border: none;
 }
 
 /* ==========================
