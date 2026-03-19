@@ -519,7 +519,7 @@ html, body {
 
 .leader-entry {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   background: var(--white);
   border-radius: 14px;
   padding: 10px 12px;
@@ -538,6 +538,7 @@ html, body {
   font-size: 14px;
   flex-shrink: 0;
   margin-right: 8px;
+  align-self: center;
   color: var(--white);
   background: #B0B0B0;
 }
@@ -545,7 +546,7 @@ html, body {
 .leader-rank-num.rank-2 { background: var(--sage); }
 .leader-rank-num.rank-3 { background: var(--sage-dark); }
 
-.leader-name-col { flex: 1.1; min-width: 0; }
+.leader-name-col { flex: 1.1; min-width: 0; align-self: center; }
 .leader-name {
   font-family: var(--font-ui);
   font-size: 15px;
@@ -566,18 +567,21 @@ html, body {
 
 .leader-msg-col {
   flex: 1.4;
+  min-width: 0;
   text-align: center;
   font-family: var(--font-body);
   font-size: 13px;
   color: #666;
   padding: 0 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .leader-score-col {
   flex: 0.7;
+  align-self: center;
   text-align: right;
   font-family: var(--font-ui);
   font-size: 20px;
