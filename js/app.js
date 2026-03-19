@@ -120,11 +120,14 @@ const App = (() => {
 
     if (!FIREBASE_DB_URL) return;
 
-    await fetch(FIREBASE_DB_URL + '/scores.json', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(entry),
-    });
+    await Promise.race([
+      fetch(FIREBASE_DB_URL + '/scores.json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(entry),
+      }).then(res => res.ok ? Promise.resolve() : Promise.reject(new Error(res.status))),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 8000)),
+    ]).catch(() => {});
   }
 
   /* ===== LOCAL STORAGE FALLBACK ===== */

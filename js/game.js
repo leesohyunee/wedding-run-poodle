@@ -250,6 +250,20 @@ const Game = (() => {
       ctx.fillRect(0, bandY, W, bandHeight);
     }
 
+    /* 문구: 레인 위에 표시 */
+    ctx.save();
+    ctx.font = 'bold 14px "Hakgyoansim", "Jua", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    ctx.strokeStyle = 'rgba(44,44,44,0.5)';
+    ctx.lineWidth = 2;
+    const hintY = laneBandTop - 18;
+    const hintText = '하트를 모아 점수를 높이고, 구덩이는 피하세요!';
+    ctx.strokeText(hintText, W / 2, hintY);
+    ctx.fillText(hintText, W / 2, hintY);
+    ctx.restore();
+
     for (const o of state.objects) drawObj(o);
     positionChar();
     for (const p of state.particles) drawPart(p);

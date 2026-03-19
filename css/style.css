@@ -38,27 +38,31 @@ html, body {
   min-height: 100dvh;
   overflow-x: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
   color: rgba(255, 255, 255, 1);
   background: rgba(255, 255, 255, 1);
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
 
-/* ===== FRAME: 메인과 동일한 기본 높이 (큰 글씨 모드에서도 버튼 위치 유지) ===== */
+/* ===== FRAME: 100svh로 안드로이드 주소창/네비바 고려, overflow-y: auto로 스크롤 가능 ===== */
 #app-frame {
   position: relative;
   width: 100%;
   max-width: 375px;
-  height: min(812px, 100dvh);
-  min-height: min(812px, 100dvh);
+  height: min(812px, 100svh, 100dvh);
+  min-height: min(812px, 100svh, 100dvh);
   max-height: 100dvh;
   margin: 0 auto;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   background: var(--sage);
 }
 
 @media (max-height: 812px) {
-  #app-frame { height: 100dvh; min-height: 100dvh; }
+  #app-frame { height: min(100svh, 100dvh); min-height: min(100svh, 100dvh); }
 }
 
 @media (min-height: 813px) {
